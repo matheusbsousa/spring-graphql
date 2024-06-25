@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5431/localbrsdb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:/db/data/data.sql
+  liquibase:
+    enabled: true
+    change-log: db/changelogs.yaml
+    drop-first: true
+    default-schema: brs
+
+
+

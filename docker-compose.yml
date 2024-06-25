@@ -1,0 +1,28 @@
+version: '3'
+services:
+
+  local-db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: localbrsdb
+    volumes:
+      - ./src/main/resources/db/scripts/01-init.sql:/docker-entrypoint-initdb.d/init.sql
+      - local-brs-data:/var/lib/postgresql/data
+    ports:
+      - "5431:5432"
+
+  dev-db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: devbrsdb
+    volumes:
+      - dev-brs-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  local-brs-data:
+  dev-brs-data:
