@@ -26,3 +26,6 @@ clean:
 	@docker compose down -v
 	@./gradlew clean
 
+.PHONY: local-db
+local-db:
+	@docker compose -f docker-compose-local.yml up

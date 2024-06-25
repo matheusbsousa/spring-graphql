@@ -10,3 +10,9 @@ databaseChangeLog:
       author: mathueusbsousa
   - include:
       file: 'db/scripts/02-pet-table.sql'
+
+  - changeSet:
+      id: 3
+      author: mathueusbsousa
+  - include:
+      file: 'db/scripts/03-owner-table.sql'

@@ -1,0 +1,11 @@
+type Query {
+    getPets(getPetsFilter: GetPetFilter): [PetDto]
+    getOwners: [OwnerDto]
+}
+
+type Mutation {
+    addPet(petInput: PetInput): PetDto
+    addOwner(ownerInput: OwnerInput): OwnerDto
+}
+
+

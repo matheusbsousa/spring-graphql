@@ -1,0 +1,23 @@
+input OwnerInput {
+    firstName: String
+    lastName: String
+    phoneNumber: String
+    email: String
+    address: String
+}
+
+input GetPetFilter {
+    isUnderMaxWeight: Boolean
+    isVaccinated: Boolean
+    isNotPoodle: Boolean
+    isAboveMinTrainingLevel: Boolean
+    isBoatRentalEligible: Boolean
+}
+
+input PetInput {
+    name: String
+    weight: Float
+    breed: String
+    isVaccinated: Boolean
+    trainingLevel: Int
+}

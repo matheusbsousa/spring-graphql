@@ -30,8 +30,6 @@ The API is responsible for receiving the requests and returning the responses.
 #### GraphQL
 For a better experience, you should access the API using the GraphQL playground interface.
 
-
-
 ---
 ## Installation
 
