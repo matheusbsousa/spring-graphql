@@ -9,7 +9,6 @@ plugins {
 }
 
 group = "com.petscreening"
-version = "0.0.1-SNAPSHOT"
 
 java {
     toolchain {

@@ -2,7 +2,7 @@ spring:
 
 #  Database configuration
   datasource:
-    url: jdbc:postgresql://localhost:5432/devbrsdb
+    url: jdbc:postgresql://dev-db:5432/devbrsdb
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
