@@ -38,7 +38,8 @@ class PetControllerTest {
             weight = 30.0,
             breed = "Poodle",
             isVaccinated = true,
-            trainingLevel = 5
+            trainingLevel = 5,
+            ownerId = 1
         )
 
         // When
