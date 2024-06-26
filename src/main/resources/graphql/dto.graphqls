@@ -15,4 +15,5 @@ type PetDto {
     isVaccinated: Boolean
     trainingLevel: Int,
     isBoatRentalEligible: Boolean
+    owner: OwnerDto
 }

@@ -5,6 +5,8 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 
 @Entity
@@ -18,7 +20,10 @@ class Pet(
     var breed: String,
     var isVaccinated: Boolean,
     var trainingLevel: Int,
-    var isBoatRentalEligible: Boolean? = null
+    var isBoatRentalEligible: Boolean? = null,
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    var owner: Owner? = null
 ) {
     fun toDto() = PetDto(
         id = id,
@@ -27,6 +32,7 @@ class Pet(
         breed = breed,
         isVaccinated = isVaccinated,
         trainingLevel = trainingLevel,
-        isBoatRentalEligible = isBoatRentalEligible!!
+        isBoatRentalEligible = isBoatRentalEligible!!,
+        owner = owner!!.toDto()
     )
 }

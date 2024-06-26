@@ -20,4 +20,5 @@ input PetInput {
     breed: String
     isVaccinated: Boolean
     trainingLevel: Int
+    ownerId: Int
 }

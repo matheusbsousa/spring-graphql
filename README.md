@@ -1,12 +1,15 @@
 # Boat Rental Service API
 
 ## Objective
-The main goal of this project is to check the eligibility of a pet to the boat rent service. The system will register the pet and owner information 
+
+The main goal of this project is to check the eligibility of a pet to the boat rent service. The system will register
+the pet and owner information
 so the users can verify if the pet is allowed to board the boat.
 
 ## Architecture
 
 ### Versions
+
 - Java JDK 21 -> Java Virtual Machine responsible for project execution
 - Kotlin 1.9 -> Programming language used for development
 - Gradle 8.5 -> Dependency management tool
@@ -18,37 +21,130 @@ so the users can verify if the pet is allowed to board the boat.
 - Git -> Version control system
 - Makefile -> Command execution tool
 
-### Database 
-The project uses a PostgreSQL database to store the data. The database is managed by the Liquibase tool, 
-which is responsible for creating the tables and versioning the database. 
+### Database
+
+The project uses a PostgreSQL database to store the data. The database is managed by the Liquibase tool,
+which is responsible for creating the tables and versioning the database.
 
 ### API
 
-The project uses the GraphQL API to manage the data. 
+The project uses the GraphQL API to manage the data.
 The API is responsible for receiving the requests and returning the responses.
 
 #### GraphQL
+
 For a better experience, you should access the API using the GraphQL playground interface.
 
+##### Examples
+
+Add Owner
+
+```graphql
+mutation {
+    addOwner(
+        ownerInput: {address: "Street 1234", email: "test@test.com", firstName: "Matthew", lastName: "Barros", phoneNumber: "5561987654321"}
+    ) {
+        address
+        email
+        firstName
+        id
+        lastName
+        phoneNumber
+    }
+}
+```
+
+Add Pet
+
+```graphql
+mutation {
+    addPet(
+        petInput: {breed: "Husky", isVaccinated: true, name: "Kobe", trainingLevel: 2, weight: 20, ownerId: 1}
+    ) {
+        breed
+        id
+        isBoatRentalEligible
+        isVaccinated
+        name
+        trainingLevel
+        weight
+        owner {
+            address
+            email
+            firstName
+            id
+            lastName
+            phoneNumber
+        }
+    }
+}
+```
+
+Get Pets
+
+```graphql
+query {
+    getPets(
+        getPetsFilter: {isAboveMinTrainingLevel: true, isBoatRentalEligible: true, isNotPoodle: true, isUnderMaxWeight: true, isVaccinated: true}
+    ) {
+        breed
+        isBoatRentalEligible
+        id
+        isVaccinated
+        name
+        trainingLevel
+        weight
+        owner {
+            id
+            firstName
+            address
+            email
+            lastName
+            phoneNumber
+        }
+    }
+}
+```
+
+Get Owners
+
+```graphql
+query {
+    getOwners {
+        address
+        email
+        firstName
+        id
+        lastName
+        phoneNumber
+    }
+}
+```
+
 ---
+
 ## Installation
 
-It is necessary install the docker and docker compose plugin to run the project. To run the project from an IDE, you also need
+It is necessary install the docker and docker compose plugin to run the project. To run the project from an IDE, you
+also need
 to install the Java JDK 21 .
 
 ### Java
 
 ### Linux
+
 ```bash 
   sudo apt-get install openjdk-21-jdk
 ```
 
 ### MacOS
+
 ```bash
   brew install openjdk@21
 ```
 
 ### Windows
+
 ```bash
   choco install openjdk-21-jdk
 ```
@@ -56,7 +152,8 @@ to install the Java JDK 21 .
 > [Configure Java PATH](https://www.geeksforgeeks.org/how-to-set-java-path-in-windows-and-linux/)
 
 ### Docker
-Please follow the official documentation the detail installation process 
+
+Please follow the official documentation the detail installation process
 
 > [How to install Docker](https://docs.docker.com/engine/install/)
 
@@ -69,38 +166,41 @@ Makefile files are used to map commands
 > [Makefile Docs - by Matheus B. Sousa](https://matheusbsousa.notion.site/Makefile-5a79d2dfcef4403aa2922c6b11a30fe0?pvs=4)
 
 ### Linux
+
 ```bash
 sudo apt-get install make
 ```
 
 ### MacOS
+
 ```bash
 brew install make
 ```
 
 ### Windows
+
 ```bash
 choco install make
 ```
 
 ## Execution
 
-To execute the project, run the command bellow on your terminal. 
+To execute the project, run the command bellow on your terminal.
 This will start the project build and the system will be executed based on the installation.
 
-The project has two types of profiles, each one for a different scenario. 
-The command will execute the project with dev profile instantiating the api and database containers. 
+The project has two types of profiles, each one for a different scenario.
+The command will execute the project with dev profile instantiating the api and database containers.
 
 ```bash
 make run-dev
 ```
 
-### Profiles 
+### Profiles
 
-Local -> Used for local development and testing. This profile runs the database 
+Local -> Used for local development and testing. This profile runs the database
 migrations everytime the project is started. *It does not keep the data after the project is stopped.*
 
-Dev -> Used for the final version of the system. This profile runs the database migrations only once, 
+Dev -> Used for the final version of the system. This profile runs the database migrations only once,
 when the project is started for the first time. *It keeps the data after the project is stopped.*
 
 

@@ -7,5 +7,6 @@ data class PetDto(
     var breed: String,
     var isVaccinated: Boolean,
     var trainingLevel: Int,
-    var isBoatRentalEligible: Boolean
+    var isBoatRentalEligible: Boolean,
+    var owner: OwnerDto
 )

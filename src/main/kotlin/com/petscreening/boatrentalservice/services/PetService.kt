@@ -1,9 +1,11 @@
 package com.petscreening.boatrentalservice.services
 
+import com.petscreening.boatrentalservice.excpetions.ResourceNotFoundException
 import com.petscreening.boatrentalservice.models.dto.PetDto
 import com.petscreening.boatrentalservice.models.entities.Pet
 import com.petscreening.boatrentalservice.models.filters.GetPetsFilter
 import com.petscreening.boatrentalservice.models.inputs.PetInput
+import com.petscreening.boatrentalservice.repositories.OwnerRepository
 import com.petscreening.boatrentalservice.repositories.PetRepository
 import com.petscreening.boatrentalservice.repositories.specifications.PetSpecification
 import org.springframework.stereotype.Service
@@ -12,7 +14,7 @@ private const val MAX_WEIGHT = 25.0
 private const val MINIMUM_TRAINING = 3
 
 @Service
-class PetService(private val petRepository: PetRepository) {
+class PetService(private val petRepository: PetRepository, private val ownerRepository: OwnerRepository) {
 
     fun getPets(getPetsFilter: GetPetsFilter): List<PetDto> {
 
@@ -27,8 +29,13 @@ class PetService(private val petRepository: PetRepository) {
     }
 
     fun addPet(petInput: PetInput): PetDto {
+
+        val owner = ownerRepository.findById(petInput.ownerId)
+            .orElseThrow { ResourceNotFoundException("Owner with id ${petInput.ownerId} not found") }
+
         val pet = petInput.toEntity()
         pet.isBoatRentalEligible = checkBoatRentalEligibility(pet)
+        pet.owner = owner
         val newPet = petRepository.save(pet)
         return newPet.toDto()
     }

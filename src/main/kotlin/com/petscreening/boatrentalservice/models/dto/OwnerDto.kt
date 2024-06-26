@@ -7,4 +7,5 @@ data class OwnerDto(
     var phoneNumber: String? = null,
     var email: String? = null,
     var address: String,
+    var pets: List<PetDto> = emptyList()
 )

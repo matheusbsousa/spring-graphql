@@ -7,7 +7,8 @@ data class PetInput(
     var weight: Double,
     var breed: String,
     var isVaccinated: Boolean,
-    var trainingLevel: Int
+    var trainingLevel: Int,
+    var ownerId: Long
 ) {
     fun toEntity() = Pet(
         name = name,
